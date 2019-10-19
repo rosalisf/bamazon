@@ -2,13 +2,15 @@ const inquirer = require("inquirer");
 const DB = require("./db.js");
 const Product = require("./product.js");
 
-function userInput() {
+function userInput(list) {
   inquirer
     .prompt([
       {
         name: "productId",
-        type: "input",
-        message: "What is the ID of the product you'd like to buy?"
+        type: "list",
+        message: "Choose the product you'd like to buy:",
+        //Populates the product names with the price form the database
+        choices: list
       },
       {
         name: "unitNumber",
@@ -17,9 +19,8 @@ function userInput() {
       }
     ])
 
-    // Set response data as a variable and retrieve it as JSON
-
     .then(answers => {
+      // This will match the answer with the product in the database
       DB.get_product_by_id(answers.productId).then(result => {
         let product = new Product(
           result[0].product_name,
@@ -27,9 +28,17 @@ function userInput() {
           result[0].price,
           result[0].stock_quantity
         );
+        // This will tell the customer/user the total price of the product(s) the customer/user wants.
+        // This will also let the customer/user know if there is not enough of whatver product the customer/user wants.
         if (product.stock_quantity > answers.unitNumber) {
           DB.update_quantity(product, answers.unitNumber).then(result => {
-            console.log(product.price * answers.unitNumber);
+            console.log(
+              "The total price of " +
+                product.product_name +
+                " is " +
+                product.price * answers.unitNumber +
+                " USD"
+            );
             DB.connection.commit();
             DB.connection.end();
           });
@@ -39,7 +48,14 @@ function userInput() {
       });
     });
 }
-userInput();
+
+DB.getAllProduct()
+  .then(function(result) {
+    userInput(result);
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
 
 // db.get_product_by_id(1).then(function(result) {
 //   console.log(result[0].id);

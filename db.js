@@ -15,6 +15,11 @@ function DB() {
     password: "root",
     database: "bamazon"
   });
+
+  this.getAllProduct = function() {
+    return this.query("SELECT product_name as name, price FROM products;");
+  };
+
   this.query = function(query, parameters) {
     return new Promise(function(resolve, reject) {
       self.connection.query(query, parameters, function(err, result) {
@@ -27,10 +32,10 @@ function DB() {
     });
   };
   this.get_product_by_id = function(id) {
-    return this.query("SELECT * FROM products WHERE id=?", [id]);
+    return this.query("SELECT * FROM products WHERE product_name=?", [id]);
   };
   this.update_quantity = function(product, units) {
-    product.stock_quantity -= 1;
+    // product.stock_quantity -= units;
     return this.query(
       "UPDATE products SET stock_quantity=stock_quantity-? WHERE product_name=?",
       [units, product.product_name]
