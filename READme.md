@@ -6,7 +6,7 @@ This program allows you to choose a product from a database in the SQL Workbench
 
 ### How to use
 
-1. In the SQl database, for example, the product Neon Genesis Evangelion: Platinum Collection, currently is at 322 in terms of stock.
+1. If you open the sql file in MySQl Workbench, for example, you can see that the product Neon Genesis Evangelion: Platinum Collection, currently is at 322 in terms of stock.
 
 ![Bamazon startup](https://github.com/rosalisf/bamazon/blob/master/bamazon_1.png)
 
@@ -22,11 +22,11 @@ This program allows you to choose a product from a database in the SQL Workbench
 
 ![Bamazon choose again](https://github.com/rosalisf/bamazon/blob/master/bamazon_4.png)
 
-5. If you check back at the SQL file opened in SQL Workbench, the amount of Neon Genesis Evangelion: Platinum Collection DVD's has updated.
+5. If you check back to the SQL file opened in MySQL Workbench, the amount of Neon Genesis Evangelion: Platinum Collection DVD's has been updated.
 
 ![Bamazon](https://github.com/rosalisf/bamazon/blob/master/bamazon_5.png)
 
-6. Press 'Control' 'C' on your keyboard to cancel the program and reactivate it by writing bamazonCustomer.js again and you'll get the same prompt from before.
+6. Press 'Control' 'C' on your keyboard to cancel the program and reactivate it by writing bamazonCustomer.js again and you'll get the same starting prompt as before.
 
 ![Bamazon choose again](https://github.com/rosalisf/bamazon/blob/master/bamazon_6.png)
 
